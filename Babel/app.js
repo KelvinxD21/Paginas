@@ -7,7 +7,13 @@ function formatName(user) {
     lastName: 'Arias'
   };
   
-  const element = <h1>Hello, {formatName(user)}! </h1>;
+  const element = <div class="container">
+        <div class="row">
+        <div class="col-12 text-center my-5">
+            <h1 class="h1">Hello, {formatName(user)}! </h1>
+        </div>
+        </div>
+   </div>
   
   ReactDOM.render(
     element,
