@@ -1,0 +1,47 @@
+// Helpers
+
+$class : (
+    p : 'padding',
+    pt : 'padding-top',
+    pr : 'padding-right',
+    pb : 'padding-bottom',
+    pl : 'padding-left',
+    m : 'margin',
+    mt : 'margin-top',
+    mr : 'margin-right',
+    mb : 'margin-bottom',
+    ml : 'margin-left'
+)!default;
+
+$grid-breakpoints: (
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px
+  ) !default;
+  $size: (
+    0: 0rem,
+    1: .25rem,   
+    2: .5rem,
+    3: 1rem,
+    4: 1.5rem,
+    5: 3rem
+  ) !default;
+
+@each $class,$atrr in $class {
+    @each $breakpoint,$media in $grid-breakpoints{
+        @media(min-width: $media){
+            @each $name,$size in $size{
+                .#{$class}-#{$breakpoint}-#{$name}{
+                    #{$atrr}: $size !important;
+                }
+            }
+        }
+    }
+    @each $name,$size in $size{
+        .#{$class}-#{$name}{
+            #{$atrr}: $size !important;
+        }
+    }  
+}
