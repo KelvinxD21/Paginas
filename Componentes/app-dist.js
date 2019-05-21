@@ -8,13 +8,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var content = [{
-  url: "img/example01.jpg",
-  title: "Card Title",
-  content: "I am a very simple card. I am good at containing small bits of information.I am convenient because I require little markup to use effectively.",
-  footer: "This is a link"
-}];
-
 var CardImage = function CardImage(props) {
   return React.createElement(
     "div",
@@ -160,6 +153,7 @@ var Cards = function (_React$Component) {
 
 var _initialiseProps = function _initialiseProps() {
   this.AddCard = function () {
+    var content = [{}];
     var ElementCard = function ElementCard(props) {
       var ListCards = props.list.map(function (content, i) {
         return React.createElement(NewCard, { content: content, key: i });

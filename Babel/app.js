@@ -1,12 +1,5 @@
   
 
-let content = [{
-  url : "img/example01.jpg",
-  title : "Card Title",
-  content : "I am a very simple card. I am good at containing small bits of information.I am convenient because I require little markup to use effectively.",
-  footer : "This is a link"
-}]
-
 const CardImage = props =>{
   return (
     <div class="card-image">
@@ -53,6 +46,9 @@ class Cards extends React.Component{
   }
 
   AddCard = () =>{
+    let content = [{
+     
+    }]
       const ElementCard = props =>{
         const ListCards = props.list.map((content,i) => <NewCard content={content} key={i} />);
         return ListCards;
