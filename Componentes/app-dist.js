@@ -2,11 +2,11 @@
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var CardImage = function CardImage(props) {
   return React.createElement(
@@ -28,7 +28,7 @@ var CardContent = function CardContent(props) {
     React.createElement(
       "p",
       null,
-      props.content.content
+      props.content.contentCard
     )
   );
 };
@@ -62,6 +62,18 @@ var NewCard = function NewCard(props) {
     )
   );
 };
+
+var ConsContent = function ConsContent(title, contentCard, footer) {
+  _classCallCheck(this, ConsContent);
+
+  this.title = title;
+  this.contentCard = contentCard;
+  this.footer = footer;
+};
+// Array of objects that contain the information the cards
+
+
+var content = [];
 
 var Cards = function (_React$Component) {
   _inherits(Cards, _React$Component);
@@ -153,7 +165,13 @@ var Cards = function (_React$Component) {
 
 var _initialiseProps = function _initialiseProps() {
   this.AddCard = function () {
-    var content = [{}];
+
+    var title = document.querySelector("#title").value;
+    var contentCard = document.querySelector("#content").value;
+    var footer = document.querySelector("#footer").value;
+    var x = new ConsContent(title, contentCard, footer);
+    content.push(x);
+    console.log(content);
     var ElementCard = function ElementCard(props) {
       var ListCards = props.list.map(function (content, i) {
         return React.createElement(NewCard, { content: content, key: i });

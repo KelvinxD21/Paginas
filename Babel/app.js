@@ -12,7 +12,7 @@ const CardImage = props =>{
 const CardContent = props =>{
   return (
     <div class="card-content">
-      <p>{props.content.content}</p>
+      <p>{props.content.contentCard}</p>
     </div>
   )
 }
@@ -40,15 +40,30 @@ const NewCard = props => {
   ) 
 }
 
+class ConsContent {
+  constructor(title,contentCard,footer){
+    this.title = title;
+    this.contentCard = contentCard;
+    this.footer = footer;
+  }  
+}
+// Array of objects that contain the information the cards
+let content = [];
+
 class Cards extends React.Component{
   constructor(props){
     super(props);
   }
+ 
 
   AddCard = () =>{
-    let content = [{
-     
-    }]
+      
+      let title = document.querySelector("#title").value;
+      let contentCard = document.querySelector("#content").value;
+      let footer = document.querySelector("#footer").value;
+      let x = new ConsContent(title,contentCard,footer);
+      content.push(x);
+      console.log(content);
       const ElementCard = props =>{
         const ListCards = props.list.map((content,i) => <NewCard content={content} key={i} />);
         return ListCards;
