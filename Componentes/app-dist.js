@@ -48,29 +48,26 @@ var CardFooter = function CardFooter(props) {
 var NewCard = function NewCard(props) {
   return React.createElement(
     "div",
-    { "class": "row" },
+    { "class": "col s12 m6" },
     React.createElement(
       "div",
-      { "class": "col s12 m7" },
-      React.createElement(
-        "div",
-        { "class": "card" },
-        React.createElement(CardImage, { content: props.content }),
-        React.createElement(CardContent, { content: props.content }),
-        React.createElement(CardFooter, { content: props.content })
-      )
+      { "class": "card" },
+      React.createElement(CardImage, { content: props.content }),
+      React.createElement(CardContent, { content: props.content }),
+      React.createElement(CardFooter, { content: props.content })
     )
   );
 };
 
-var ConsContent = function ConsContent(title, contentCard, footer) {
+var ConsContent = function ConsContent(url, title, contentCard, footer) {
   _classCallCheck(this, ConsContent);
 
+  this.url = url;
   this.title = title;
   this.contentCard = contentCard;
   this.footer = footer;
 };
-// Array of objects that contain the information the cards
+// // Array of objects that contain the information the cards
 
 
 var content = [];
@@ -81,6 +78,9 @@ var Cards = function (_React$Component) {
   function Cards(props) {
     _classCallCheck(this, Cards);
 
+    // this.state = {
+    //   content: content
+    // };
     var _this = _possibleConstructorReturn(this, (Cards.__proto__ || Object.getPrototypeOf(Cards)).call(this, props));
 
     _initialiseProps.call(_this);
@@ -153,7 +153,11 @@ var Cards = function (_React$Component) {
                 "Add Card"
               )
             ),
-            React.createElement("div", { id: "container", "class": "col s12 m12 l8" })
+            React.createElement(
+              "div",
+              { "class": "col s12 m12 l8" },
+              React.createElement("div", { id: "container", "class": "row" })
+            )
           )
         )
       );
@@ -165,13 +169,21 @@ var Cards = function (_React$Component) {
 
 var _initialiseProps = function _initialiseProps() {
   this.AddCard = function () {
-
+    try {
+      var name = document.querySelector("#img").files[0].name;
+      var url = "img/" + name;
+    } catch (error) {
+      var url = "img/481234-PGFQZM-430.jpg";
+    }
     var title = document.querySelector("#title").value;
     var contentCard = document.querySelector("#content").value;
     var footer = document.querySelector("#footer").value;
-    var x = new ConsContent(title, contentCard, footer);
+    var x = new ConsContent(url, title, contentCard, footer);
+    // this.setState({
+    //   content: content[x]
+    // })
+
     content.push(x);
-    console.log(content);
     var ElementCard = function ElementCard(props) {
       var ListCards = props.list.map(function (content, i) {
         return React.createElement(NewCard, { content: content, key: i });
@@ -183,3 +195,10 @@ var _initialiseProps = function _initialiseProps() {
 };
 
 ReactDOM.render(React.createElement(Cards, null), document.getElementById('app'));
+var ElementCard = function ElementCard(props) {
+  var ListCards = props.list.map(function (content, i) {
+    return React.createElement(NewCard, { content: content, key: i });
+  });
+  return ListCards;
+};
+ReactDOM.render(React.createElement(ElementCard, { list: content }), document.getElementById('container'));

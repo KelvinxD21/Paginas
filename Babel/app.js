@@ -28,42 +28,52 @@ const CardFooter = props =>{
 
 const NewCard = props => {
   return(
-    <div class="row">
-      <div class="col s12 m7">
+      <div class="col s12 m6">
         <div class="card">
           <CardImage content={props.content} />
           <CardContent content={props.content} />
           <CardFooter content={props.content} />
         </div>
       </div>
-    </div>
   ) 
 }
 
 class ConsContent {
-  constructor(title,contentCard,footer){
+  constructor(url,title,contentCard,footer){
+    this.url = url;
     this.title = title;
     this.contentCard = contentCard;
     this.footer = footer;
   }  
 }
-// Array of objects that contain the information the cards
+// // Array of objects that contain the information the cards
 let content = [];
 
 class Cards extends React.Component{
   constructor(props){
     super(props);
+    
+    // this.state = {
+    //   content: content
+    // };
   }
  
-
   AddCard = () =>{
-      
+      try {
+        let name = document.querySelector("#img").files[0].name;
+        var url = "img/" + name;
+      } catch (error) {
+        var url = "img/481234-PGFQZM-430.jpg";
+      }
       let title = document.querySelector("#title").value;
       let contentCard = document.querySelector("#content").value;
       let footer = document.querySelector("#footer").value;
-      let x = new ConsContent(title,contentCard,footer);
+      let x = new ConsContent(url,title,contentCard,footer);
+      // this.setState({
+      //   content: content[x]
+      // })
+      
       content.push(x);
-      console.log(content);
       const ElementCard = props =>{
         const ListCards = props.list.map((content,i) => <NewCard content={content} key={i} />);
         return ListCards;
@@ -99,9 +109,12 @@ class Cards extends React.Component{
                        Add Card
                 </a>
             </div>
-            <div id="container" class="col s12 m12 l8">
-            
+            <div class="col s12 m12 l8">
+              <div id="container" class="row">
+
+              </div>
             </div>
+            {}
           </div>
         </div>
    </div>
@@ -112,5 +125,9 @@ ReactDOM.render(
   <Cards />,
   document.getElementById('app')
 );
- 
+const ElementCard = props =>{
+  const ListCards = props.list.map((content,i) => <NewCard content={content} key={i} />);
+  return ListCards;
+}
+ReactDOM.render(<ElementCard list={content} />,document.getElementById('container'));
  
